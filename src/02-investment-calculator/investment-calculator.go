@@ -11,18 +11,30 @@ func main() {
 	var years float64
 	expectedReturnRate := 5.5
 
-	fmt.Print("Please, enter the investment amount:")
+	outputText("Please, enter the investment amount:")
 	fmt.Scan(&investmentAmount)
 
-	fmt.Print("Expected return rate:")
+	outputText("Expected return rate:")
 	fmt.Scan(&expectedReturnRate)
 
-	fmt.Print("Years:")
+	outputText("Years:")
 	fmt.Scan(&years)
 
-	futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
-	futureRealValue := futureValue / math.Pow(1+inflationRate/100, years)
+    futureValue, futureRealValue := calculateFutureValues(investmentAmount, expectedReturnRate, years, inflationRate)
+	// futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
+	// futureRealValue := futureValue / math.Pow(1+inflationRate/100, years)
 
-	fmt.Println(futureValue)
-	fmt.Println(futureRealValue)
+	fmt.Println("Future value: %v", futureValue)
+	fmt.Println("Future real value: %f", futureRealValue)
+    
+}
+
+func outputText(text string) {
+    fmt.Println(text)
+}
+
+func calculateFutureValues(investmentAmount float64, expectedReturnRate float64, years float64, inflationRate float64) (float64, float64) {
+    fv := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
+    rfv := fv / math.Pow(1+inflationRate/100, years)
+    return fv, rfv
 }
