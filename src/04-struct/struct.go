@@ -25,7 +25,12 @@ func main() {
 		return
 	}
 
-	// passing pointer to avoid creating of one more variable (inside printUserDetails)
+    admin := user.NewAdmin("test@example.com", "test123")
+
+    admin.PrintUserDetails()
+    admin.ClearUserName()
+    admin.PrintUserDetails()
+
 	appUser.PrintUserDetails()
 	appUser.ClearUserName()
 	appUser.PrintUserDetails()
